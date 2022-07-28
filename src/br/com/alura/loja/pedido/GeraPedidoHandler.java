@@ -20,8 +20,9 @@ public class GeraPedidoHandler {
     }
 
     public void execute(GeraPedido dados) {
+        // Após mudança do composite, teria que refatorar esse código, pois a quantidade de itens não está sendo considerada
         Orcamento orcamento = new Orcamento();
-        orcamento.adicionarItem(new ItemOrcamento(new BigDecimal("200")));
+        orcamento.adicionarItem(new ItemOrcamento(dados.getValorOrcamento()));
         Pedido pedido = new Pedido(dados.getCliente(), LocalDateTime.now(), orcamento);
 
         acoes.forEach(acao -> acao.executarAcao(pedido));
